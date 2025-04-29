@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EchoNest | Sign Up</title>
+  <script src="https://kit.fontawesome.com/fc1e235b2e.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #c3cfe2, #f5f7fa);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .signup-shell {
+      width: 950px;
+      height: 620px;
+      display: flex;
+      border-radius: 18px;
+      overflow: hidden;
+      background-color: #ffffff;
+      box-shadow: 0 0 30px rgba(0,0,0,0.15);
+    }
+
+    .visual-side {
+      flex: 1;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      color: #2f2f2f;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .visual-side h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .visual-side p {
+      font-size: 1rem;
+      opacity: 0.85;
+      margin-bottom: 20px;
+    }
+
+    .visual-side img {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: auto;
+    }
+
+    .form-side {
+      flex: 1;
+      background-color: #f9f9f9;
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-side h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    form input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 2px solid #d1d5db;
+      background-color: #ffffff;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    form input:focus {
+      border-color: #66a6ff;
+      background-color: #f0f4ff;
+      outline: none;
+    }
+
+    .form-btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      background-color: #66a6ff;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .form-btn:hover {
+      background-color: #558de8;
+    }
+
+    .alert {
+      background-color: #ffe0e0;
+      color: #b30000;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+
+    .sign-up {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    .sign-up a {
+      color: #3b82f6;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .sign-up a:hover {
+      text-decoration: underline;
+    }
+
+    .get-the-app {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .get-the-app span {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .badges img {
+      width: 120px;
+      margin: 0 5px;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+
+    .badges img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="signup-shell">
+    <div class="visual-side">
+      <h2>Join EchoNest</h2>
+      <p>Start sharing your vibes!</p>
+      <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fHNvY2lhbCUyMG1lZGlhfGVufDB8fHx8MTY3NjYzNTUyMA&ixlib=rb-4.0.3&q=80&w=400" alt="Social Media Visual" />
+    </div>
+
+    <div class="form-side">
+      <h1>Create Account</h1>
+      <form method="POST">
+        {% csrf_token %}
+
+        {% if form.errors %}
+          <div class="alert">
+            <ul>
+              {% for field in form %}
+                {% for error in field.errors %}
+                  <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        {{ form.username }}
+        {{ form.email }}
+        {{ form.password1 }}
+        {{ form.password2 }}
+
+        <button class="form-btn" type="submit">Sign Up</button>
+      </form>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <div class="sign-up">
+        Already have an account? <a href="{% url 'sign-in' %}">Sign In</a>
+      </div>
+
+      <div class="get-the-app">
+        <span>Get the app.</span>
+        <div class="badges">
+          <img src="{% static 'assets2/images/app-store.png' %}" alt="app-store badge">
+          <img src="{% static 'assets2/images/google-play.png' %}" alt="google-play badge">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EchoNest</title>
+  <script src="https://kit.fontawesome.com/fc1e235b2e.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-shell {
+      width: 950px;
+      height: 600px;
+      display: flex;
+      border-radius: 18px;
+      overflow: hidden;
+      background-color: #fef6e4;
+      box-shadow: 0 0 30px rgba(0,0,0,0.15);
+    }
+
+    .visual-side {
+      flex: 1;
+      background: linear-gradient(135deg, #f6d365, #fda085);
+      color: #2f2f2f;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .visual-side h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .visual-side p {
+      font-size: 1rem;
+      opacity: 0.85;
+    }
+
+    .visual-side img {
+      margin-top: auto;
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .form-side {
+      flex: 1;
+      background-color: #f1fdfc;
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-side h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    form input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 2px solid #e0c3fc;
+      background-color: #fff8f0;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    form input:focus {
+      border-color: #a18cd1;
+      background-color: #fff0e5;
+      outline: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background-color: #a18cd1;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+      background-color: #8e74b8;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 25px 0 10px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    .social-login {
+      display: block;
+      background-color: #4267B2;
+      color: white;
+      padding: 10px 18px;
+      text-align: center;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+
+    .social-login:hover {
+      background-color: #365899;
+    }
+
+    .helper-links {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .helper-links a {
+      font-size: 0.85rem;
+      color: #f77f00;
+      text-decoration: none;
+    }
+
+    .helper-links a:hover {
+      text-decoration: underline;
+    }
+
+    .signup-callout {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 0.9rem;
+    }
+
+    .signup-callout a {
+      color: #3b82f6;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .signup-callout a:hover {
+      text-decoration: underline;
+    }
+
+    .store-badges {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .store-badges img {
+      width: 120px;
+      margin: 0 5px;
+      border-radius: 6px;
+      transition: transform 0.3s;
+    }
+
+    .store-badges img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-shell">
+    <div class="visual-side">
+      <h2>Welcome to EchoNest</h2>
+      <p>sharing your thoughts like echoes</p>
+      <img src="https://images.wondershare.com/virtulook/articles/ai-photo-editor-online.jpg" alt="Visual" />
+    </div>
+
+    <div class="form-side">
+      <h1>Sign In</h1>
+      <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="submit-btn">Continue</button>
+      </form>
+
+      <div class="divider">or login using</div>
+      <a href="#" class="social-login"><i class="fab fa-facebook"></i> Login with Facebook</a>
+
+      <div class="helper-links">
+        <a href="#">Forgot your password?</a>
+      </div>
+
+      <div class="signup-callout">
+        New to EchoNest  <a href="{% url 'sign-up' %}">Create an account</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
